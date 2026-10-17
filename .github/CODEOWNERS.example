@@ -1,0 +1,7 @@
+# 替换真实用户名，并改名为 CODEOWNERS 后启用。
+# 分支保护中同时要求 Code Owner 审阅。
+* @YOUR-MAINTAINER
+/.github/ @YOUR-MAINTAINER
+/docs/.vitepress/ @YOUR-MAINTAINER
+/docs/platform/ @PLATFORM-REVIEWER
+/docs/vla/ @VLA-REVIEWER
