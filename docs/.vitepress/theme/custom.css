@@ -97,7 +97,10 @@ html { scroll-behavior: smooth; }
 /* ===== 侧栏 ===== */
 .VPSidebar { border-right: 1px solid var(--vp-c-divider); scrollbar-width: thin; }
 
-/* 侧栏左内边距：VitePress 默认左右都是 32px，窄屏下左侧留白显得过宽。
+/* 侧栏内边距：目标 padding 左右 12px、底部 16px（原来左右 32px、底部 96px）。
+   顶部保持 --vp-nav-height：导航栏是 fixed 定位盖在页面最上方，
+   侧栏顶部必须让出这一段高度，否则第一项会被导航栏遮住。
+
    注意超宽屏（>1440px）时 VitePress 会自动把 padding-left 算成
    (侧栏宽 - 内容宽) / 2 来实现居中，例如 1920px 下是 264.5px。
    所以这里只在 <=1440px 时收紧，宽屏继续沿用官方居中公式，
@@ -109,25 +112,49 @@ html { scroll-behavior: smooth; }
    这里用 .VPSidebar.VPSidebar（0,2,0）与默认规则持平，
    靠样式表顺序（本文件在主题默认样式之后）胜出。 */
 @media (max-width: 1440px) {
-  .VPSidebar.VPSidebar { padding-left: 20px; }
+  .VPSidebar.VPSidebar {
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 16px;
+  }
+
+  /* .curtain 是侧栏顶部的吸顶遮罩，官方用 margin -32px 抵消侧栏 32px 内边距，
+     让遮罩铺满整个侧栏宽度。侧栏内边距收到 12px 后，-32px 会横向溢出 20px，
+     在侧栏里撑出横向滚动条。这里跟着实际内边距改成 -12px。 */
+  .VPSidebar .curtain {
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+
+  /* 当前项左侧的 2px 高亮竖线（.indicator）用 left: -17px 定位在条目外面，
+     条目本身有 -8px 负边距，于是这条线落到侧栏左边界外 13px。
+     侧栏已设 overflow-x: hidden，线条本来就被裁掉看不到，
+     但它会把 scrollWidth 撑大、产生可横向拖动的假象。这里直接不显示。 */
+  .VPSidebar .VPSidebarItem .indicator {
+    display: none;
+  }
 }
 
 .VPSidebar .group + .group { border-top: 1px solid var(--vp-c-divider); margin-top: 14px; padding-top: 14px; }
 .VPSidebar .VPSidebarItem.level-0 > .item .text { font-size: 12px; letter-spacing: .15px; font-weight: 650; }
-.VPSidebar .VPSidebarItem.level-1 > .item { padding: 1px 10px; border-radius: 5px; margin: 1px -6px; }
+/* 条目左右各留 8px 内边距，同时用 -8px 负外边距让高亮底色铺到容器边缘。
+   侧栏 padding 已收到 12px，负边距不能超过它，否则高亮块会顶出侧栏。 */
+.VPSidebar .VPSidebarItem.level-1 > .item { padding: 1px 8px; border-radius: 5px; margin: 1px -8px; }
 .VPSidebar .VPSidebarItem.level-1 .text { font-size: 13px; line-height: 25px; font-weight: 400; }
 .VPSidebar .VPSidebarItem.level-1.is-active > .item { background: var(--vp-c-brand-soft); }
 .VPSidebar .VPSidebarItem.level-1.is-active > .item .text { font-weight: 550; }
 
-/* 侧栏顶部：产品卡（用 .VPSidebar 提高优先级，覆盖默认链接样式） */
-.VPSidebar .lab-product { display: flex; gap: 9px; align-items: center; padding: 12px 10px; border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); background: var(--vp-c-bg); margin: 0 -4px 12px; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+/* 侧栏顶部：产品卡（用 .VPSidebar 提高优先级，覆盖默认链接样式）
+   负边距从 -4px 收到 -2px：侧栏 padding 已收窄到 12px，
+   产品卡再往外撑会贴着侧栏边框，留不出视觉呼吸。 */
+.VPSidebar .lab-product { display: flex; gap: 9px; align-items: center; padding: 12px 10px; border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); background: var(--vp-c-bg); margin: 0 -2px 12px; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
 .VPSidebar .lab-product:hover { border-color: var(--vp-c-brand-1); box-shadow: var(--lab-shadow); }
 .VPSidebar .lab-product-symbol { flex: none; color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); width: 32px; height: 34px; padding: 5px; border-radius: 6px; }
 .VPSidebar .lab-product-text { flex: 1; min-width: 0; }
 .VPSidebar .lab-product strong { display: block; font-size: 12.5px; font-weight: 650; line-height: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .VPSidebar .lab-product small { display: block; font-size: 10.5px; color: var(--vp-c-text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .VPSidebar .lab-product-arrow { margin-left: auto; color: var(--vp-c-text-3); font-size: 13px; }
-.lab-version { display: flex; align-items: center; justify-content: space-between; color: var(--vp-c-text-3); font-size: 11.5px; margin: 0 6px 22px; }
+.lab-version { display: flex; align-items: center; justify-content: space-between; color: var(--vp-c-text-3); font-size: 11.5px; margin: 0 4px 22px; }
 .lab-version-tag { display: inline-flex; align-items: center; gap: 6px; color: var(--vp-c-text-2); font-family: Consolas, monospace; font-size: 11px; }
 .lab-version-tag i { width: 5px; height: 5px; border-radius: 50%; background: #10a875; display: inline-block; }
 

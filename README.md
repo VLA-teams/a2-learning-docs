@@ -18,7 +18,7 @@
 - 维护者：邀请成员、保护 `main`、审核合并，见 [docs/deployment.md](docs/deployment.md)。
 - 先只修改已有页面；新增页面需要注册到 `docs/.vitepress/theme/catalog.json`，暂由维护者统一处理。
 
-**当前状态**：邀请组员、保护 `main`、试点 PR 尚未执行，等新版本上传 GitHub 后按 `docs/deployment.md` 第二～四节完成。
+**当前状态**：邀请组员、保护 `main`、试点 PR 均已完成（2026-10-19）。首位组员 `zzy1239` 通过 PR #1 跑通了「网页编辑 → 提交分支 → 自动检查 → 审核合并 → 自动部署」全流程，可以批量邀请其余成员。详见 [docs/deployment.md](docs/deployment.md) 第四节。
 
 ## 项目结构
 
