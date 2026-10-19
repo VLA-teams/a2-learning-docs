@@ -2,7 +2,7 @@
 title: "如何更新文档"
 description: "用 GitHub 网页修改文档、提交 PR 并完成审核发布，不需要安装 Git 或 Node.js。"
 author: 文档共建小组
-status: review
+status: verified
 date: 2026-10-19
 ---
 
