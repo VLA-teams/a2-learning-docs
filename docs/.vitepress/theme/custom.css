@@ -24,7 +24,7 @@
 
   /* 字体与布局 */
   --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --vp-sidebar-width: 272px;
+  --vp-sidebar-width: 250px;
   --vp-layout-max-width: 1440px;
   --vp-nav-height: 56px;
 
@@ -164,23 +164,31 @@ html { scroll-behavior: smooth; }
 .VPSidebar .lab-product small { display: block; font-size: 12.5px; color: var(--vp-c-text-3); line-height: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .VPSidebar .lab-product-arrow { margin-left: auto; color: var(--vp-c-text-3); font-size: 13px; }
 
-/* 版本行：官方是下拉框样式，这里做成扁平的版本标签条 */
+/* 版本行：侧栏顶部。
+   "主要学习平台" 和版本胶囊都靠左排列、紧挨着，不再用 space-between
+   把胶囊推到最右边——侧栏收窄到 250px 后，右侧空间很紧，
+   推过去反而贴边显脏。 */
 .lab-version {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 8px;
   color: var(--vp-c-text-3);
   font-size: 13px;
   margin: 0 0 16px;
   padding: 0 2px;
+  min-width: 0;
 }
+.lab-version > span:first-child { flex: 0 1 auto; min-width: 0; }
 .lab-version-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  flex: 0 0 auto;
   color: var(--vp-c-text-2);
   font-family: inherit;
   font-size: 13px;
+  white-space: nowrap;
   background: var(--vp-c-bg-alt);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
@@ -218,6 +226,13 @@ html { scroll-behavior: smooth; }
 
 /* 侧栏滚动条与吸顶遮罩：跟随 12px 内边距 */
 .VPSidebar .curtain { margin-right: -12px; margin-left: -12px; }
+
+/* 当前项左侧的 2px 高亮竖线（.indicator）用 left: -17px 定位在条目外，
+   条目本身还有负边距，整条线会落到侧栏边界之外。
+   侧栏是 overflow-x: hidden，这个竖线本来就被裁掉看不见，
+   但它会把 scrollWidth 撑大、在移动端抽屉里产生可横向拖动的假象，
+   这里直接不渲染。 */
+.VPSidebar .VPSidebarItem .indicator { display: none; }
 
 /* ===== 正文容器（官方：max-width min(1320px,100%)，padding 40px 24px 64px） =====
    注意 .VPDoc .content 指的是正文主列；右侧目录在同级 .aside 里，
