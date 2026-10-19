@@ -12,9 +12,7 @@ date: 2026-10-17
 
 ## 本模块文档
 
-- [Ubuntu / SSH / 网络连接](/setup/ubuntu-ssh-network)：统一开发机环境与网络登录流程。
-- [ROS2 Humble 环境配置](/setup/ros2-humble)：记录工作空间、依赖和消息通信配置。
-- [AimDK 安装和启动](/setup/aimdk)：对齐官方版本，记录安装与启动过程。
+<ModulePages />
 
 ## 参与更新
 

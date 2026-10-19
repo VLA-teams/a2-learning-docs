@@ -62,7 +62,3 @@ order: 1
 - [A2 v2.1：A2 旗舰款概述](https://open.agibot.com/docs/aimdk/a2/v2_1/dev_guide/01-a2_overview)
 
 建议从官方目录继续阅读软件系统、二次开发接口、快速上手和运控仿真。本页用于沉淀小组实践，不替代官方手册。
-
-## 组内资料
-
-- [AGIBOT A2 5090 小白教程（PDF，约 166 KB）](/files/agibot-a2-5090-tutorial.pdf)：组员上传的入门教程，适合第一次接触 A2 时通读。

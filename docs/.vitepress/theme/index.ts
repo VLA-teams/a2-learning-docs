@@ -5,6 +5,7 @@ import LabHeader from './components/LabHeader.vue'
 import PageMeta from './components/PageMeta.vue'
 import PageEnd from './components/PageEnd.vue'
 import LabHome from './components/LabHome.vue'
+import ModulePages from './components/ModulePages.vue'
 import './custom.css'
 
 export default {
@@ -14,5 +15,8 @@ export default {
     'doc-before': () => h(PageMeta),
     'doc-after': () => h(PageEnd)
   }),
-  enhanceApp({ app }) { app.component('LabHome', LabHome) }
+  enhanceApp({ app }) {
+    app.component('LabHome', LabHome)
+    app.component('ModulePages', ModulePages)
+  }
 } satisfies Theme

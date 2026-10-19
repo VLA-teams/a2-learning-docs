@@ -1,6 +1,8 @@
 node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
+# 构建时扫描 Markdown 生成，不在仓库保存旧目录。
+docs/.vitepress/theme/catalog.json
 .env
 .env.local
 *.log

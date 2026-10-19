@@ -28,7 +28,7 @@
 │  ├─ .vitepress/
 │  │  ├─ config.mts               # 站点配置：标题、导航、侧栏、搜索
 │  │  └─ theme/                   # 自定义主题、目录配置与样式
-│  │     ├─ catalog.json          # 自动生成的六栏目目录（侧栏与首页共用）
+│  │     ├─ catalog.json          # 本地/CI 自动生成并忽略（GitHub 仓库不存储）
 │  │     └─ components/           # LabHome / LabHeader / PageMeta
 │  ├─ platform/ setup/ simulation/ vla/ handbook/ updates/   # 六栏目
 │  ├─ guide/                      # 快速开始
@@ -44,7 +44,8 @@
 ## 内容与主题
 
 - 内容目录：`docs/platform`、`setup`、`simulation`、`vla`、`handbook`、`updates`。
-- 目录与首页入口：`scripts/build-catalog.mjs` 递归扫描六个栏目（含子目录），从 frontmatter 读取 `title`、`description`、可选的 `order`，生成 `docs/.vitepress/theme/catalog.json`；左侧栏和首页卡片共用，生成文件无需手工编辑。
+- 自动目录：`scripts/build-catalog.mjs` 每次按现存 Markdown 全量重建 `docs/.vitepress/theme/catalog.json`；侧栏、首页和栏目概览页共用。该文件由 `.gitignore` 忽略，不在 GitHub 仓库保存，也不需要回写提交；删除页面后下次构建会自动移除对应条目。
+- 栏目概览页通过 `<ModulePages />` 自动列出本栏目页面，无需维护手写链接列表。其他正文里的交叉引用、PDF 引用仍需在删除目标文件时一并清理，内容检查会提示遗漏。
 - 排序：`order` 数字越小越靠前；未填写时排在带 `order` 的页面后面，再按相对文件路径排序。栏目根目录的 `index.md` 不重复列出，子目录的 `index.md` 正常收录。新增顶层栏目需由维护者修改脚本中的 `GROUPS`。
 - 样式：`docs/.vitepress/theme/custom.css` 与 `components/`。
 - 页面模板：`templates/page.md`。

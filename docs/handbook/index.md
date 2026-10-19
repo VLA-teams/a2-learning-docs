@@ -12,9 +12,7 @@ date: 2026-10-17
 
 ## 本模块文档
 
-- [桌面抓杯子实验](/handbook/pick-cup)：记录场景准备、感知、执行与抓取结果。
-- [视觉感知与点云采集](/handbook/perception)：对齐图像、深度、点云、标定与时间戳。
-- [故障排查与解决记录](/handbook/troubleshooting)：记录现象、复现、定位、修复与复测。
+<ModulePages />
 
 ## 参与更新
 

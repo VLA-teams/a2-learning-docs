@@ -12,9 +12,7 @@ date: 2026-10-17
 
 ## 本模块文档
 
-- [PoseVLA 与模型架构](/vla/posevla)：整理论文、代码版本、模型输入及动作输出。
-- [模型推理服务部署](/vla/inference-service)：建立可回放的推理服务与部署记录。
-- [真实机器人闭环评估](/vla/closed-loop-eval)：统一任务、起始条件、判据与运行日志。
+<ModulePages />
 
 ## 参与更新
 

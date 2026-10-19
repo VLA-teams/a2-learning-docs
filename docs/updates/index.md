@@ -12,9 +12,7 @@ date: 2026-10-17
 
 ## 本模块文档
 
-- [更新日志](/updates/changelog)：记录实际发生的页面和流程变更。
-- [已知问题](/updates/known-issues)：跟踪未解决问题、负责人和关闭条件。
-- [实验进展](/updates/progress)：记录进展、证据、阻塞和下一步。
+<ModulePages />
 
 ## 参与更新
 
