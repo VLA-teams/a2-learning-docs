@@ -1,94 +1,310 @@
+/* ==========================================================================
+   A2 学习与开发文档中心 · 主题样式
+   1) 设计 token  2) 导航/侧栏  3) 首页  4) 页面元信息（状态条）
+   5) 正文排版  6) 表格/代码  7) 提示框  8) 反馈条/页脚  9) 404  10) 响应式
+   ========================================================================== */
+
 :root {
-  --vp-c-brand-1: #2563eb; --vp-c-brand-2: #1d4ed8; --vp-c-brand-3: #2563eb;
-  --vp-c-brand-soft: rgba(37,99,235,.07);
-  --vp-c-bg: #fff; --vp-c-bg-alt: #fafbfc; --vp-c-bg-soft: #f6f8fa;
-  --vp-c-divider: #e9ecf0; --vp-c-text-1: #20242b; --vp-c-text-2: #606874; --vp-c-text-3: #8a919c;
-  --vp-font-family-base: 'Inter','Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
-  --vp-sidebar-width: 278px; --vp-layout-max-width: 1600px; --vp-nav-height: 64px;
+  /* 品牌色 */
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #1d4ed8;
+  --vp-c-brand-3: #2563eb;
+  --vp-c-brand-soft: rgba(37, 99, 235, .07);
+
+  /* 背景与文字（text-3 由 #8a919c 调深到 #6b7280，保证小字对比度 ≥4.5:1） */
+  --vp-c-bg: #fff;
+  --vp-c-bg-alt: #fafbfc;
+  --vp-c-bg-soft: #f6f8fa;
+  --vp-c-divider: #e9ecf0;
+  --vp-c-text-1: #20242b;
+  --vp-c-text-2: #606874;
+  --vp-c-text-3: #6b7280;
+
+  /* 字体与布局 */
+  --vp-font-family-base: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --vp-sidebar-width: 278px;
+  /* VitePress 1440px 以上会用 layout-max-width 计算侧栏宽度；
+     设为 1600 会让 1440 视口下的侧栏被压窄到约 190px，这里保持 1440。 */
+  --vp-layout-max-width: 1440px;
+  --vp-nav-height: 64px;
+
+  /* 提示系统 token */
+  --lab-radius: 8px;
+  --lab-border: #e6e9ef;
+  --lab-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 2px 8px rgba(16, 24, 40, .06);
+  --lab-info: #2563eb;  --lab-info-bg: #eff6ff;  --lab-info-line: #bfdbfe;
+  --lab-tip: #0f766e;   --lab-tip-bg: #ecfdf5;   --lab-tip-line: #a7f3d0;
+  --lab-warn: #b45309;  --lab-warn-bg: #fffbeb;  --lab-warn-line: #fde68a;
+  --lab-danger: #b91c1c;--lab-danger-bg: #fef2f2;--lab-danger-line: #fecaca;
+  --lab-ok: #059669;    --lab-ok-bg: #ecfdf5;    --lab-ok-line: #a7f3d0;
+
+  /* 实心填充控件专用色（浅色主题）：与文字色分开，保证白字对比度 */
+  --lab-solid: #2563eb;
+  --lab-solid-hover: #1d4ed8;
+  --lab-solid-info: #2563eb;
+  --lab-solid-warn: #b45309;
+  --lab-solid-ok: #047857;
+  --lab-solid-danger: #b91c1c;
+  --lab-on-solid: #ffffff;
+
+  /* 代码复制按钮点击后的提示文案 */
+  --vp-code-copy-copied-text-content: '已复制';
 }
-.dark { --vp-c-bg: #17191e; --vp-c-bg-alt: #14161a; --vp-c-bg-soft: #20232b; --vp-c-divider: #2b2f37;
-  --vp-c-text-1: #e6e9ef; --vp-c-text-2: #a0a8b5; --vp-c-text-3: #788291;
-  --vp-c-brand-1: #8ab4ff; --vp-c-brand-2: #a5c5ff; --vp-c-brand-3: #477fe7; --vp-c-brand-soft: rgba(106,153,241,.12); }
+
+.dark {
+  --vp-c-bg: #17191e;
+  --vp-c-bg-alt: #14161a;
+  --vp-c-bg-soft: #20232b;
+  --vp-c-divider: #2b2f37;
+  --vp-c-text-1: #e6e9ef;
+  --vp-c-text-2: #a0a8b5;
+  --vp-c-text-3: #8a919c;
+  --vp-c-brand-1: #8ab4ff;
+  --vp-c-brand-2: #a5c5ff;
+  --vp-c-brand-3: #477fe7;
+  --vp-c-brand-soft: rgba(106, 153, 241, .12);
+
+  --lab-border: #2b2f37;
+  --lab-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 2px 10px rgba(0, 0, 0, .25);
+  --lab-info: #8ab4ff;  --lab-info-bg: rgba(106, 153, 241, .1);  --lab-info-line: rgba(138, 180, 255, .28);
+  --lab-tip: #34d399;   --lab-tip-bg: rgba(16, 185, 129, .09);   --lab-tip-line: rgba(16, 185, 129, .3);
+  --lab-warn: #fbbf24;  --lab-warn-bg: rgba(245, 158, 11, .1);   --lab-warn-line: rgba(245, 158, 11, .32);
+  --lab-danger: #f87171;--lab-danger-bg: rgba(239, 68, 68, .1);  --lab-danger-line: rgba(239, 68, 68, .32);
+  --lab-ok: #34d399;    --lab-ok-bg: rgba(16, 185, 129, .12);    --lab-ok-line: rgba(16, 185, 129, .35);
+
+  /* 实心填充控件（主按钮 / 状态徽章 / 反馈按钮）专用色。
+     暗色下 --lab-info 等是给"文字"用的浅色，直接当背景会让白字不可读
+     （#fff on #8ab4ff 仅 2.09:1）。这里改用深一档的实心色，白字可达 4.5:1 以上。 */
+  --lab-solid: #2563eb;
+  --lab-solid-hover: #1d4ed8;
+  --lab-solid-info: #2563eb;
+  --lab-solid-warn: #b45309;
+  --lab-solid-ok: #047857;
+  --lab-solid-danger: #b91c1c;
+  --lab-on-solid: #ffffff;
+}
+
 html { scroll-behavior: smooth; }
+::selection { background: rgba(37, 99, 235, .16); }
+
+/* ===== 导航 ===== */
 .VPNavBar { border-bottom: 1px solid var(--vp-c-divider); }
 .VPNavBar .title { font-size: 16px; letter-spacing: -.4px; gap: 10px; }
 .VPNavBarTitle .logo { height: 27px; width: 27px; }
 .VPNavBarSearch .DocSearch-Button { background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider); border-radius: 6px; }
+.VPNavBarSearch .DocSearch-Button:hover { border-color: var(--vp-c-brand-1); }
+
+/* ===== 侧栏 ===== */
 .VPSidebar { border-right: 1px solid var(--vp-c-divider); scrollbar-width: thin; }
-.VPSidebar .group + .group { border-top: 0; margin-top: 17px; padding-top: 0; }
+
+/* 侧栏左内边距：VitePress 默认左右都是 32px，窄屏下左侧留白显得过宽。
+   注意超宽屏（>1440px）时 VitePress 会自动把 padding-left 算成
+   (侧栏宽 - 内容宽) / 2 来实现居中，例如 1920px 下是 264.5px。
+   所以这里只在 <=1440px 时收紧，宽屏继续沿用官方居中公式，
+   否则大屏上侧栏内容会被顶到很靠右的位置。
+
+   特异性说明：默认规则是 .VPSidebar[data-v-319d5ca6]（0,2,0）。
+   只写 .VPSidebar（0,1,0）或 html .VPSidebar（0,1,1）都压不过它——
+   比较特异性时先比类/属性数量，元素选择器加得再多也不如多一个类。
+   这里用 .VPSidebar.VPSidebar（0,2,0）与默认规则持平，
+   靠样式表顺序（本文件在主题默认样式之后）胜出。 */
+@media (max-width: 1440px) {
+  .VPSidebar.VPSidebar { padding-left: 20px; }
+}
+
+.VPSidebar .group + .group { border-top: 1px solid var(--vp-c-divider); margin-top: 14px; padding-top: 14px; }
 .VPSidebar .VPSidebarItem.level-0 > .item .text { font-size: 12px; letter-spacing: .15px; font-weight: 650; }
 .VPSidebar .VPSidebarItem.level-1 > .item { padding: 1px 10px; border-radius: 5px; margin: 1px -6px; }
 .VPSidebar .VPSidebarItem.level-1 .text { font-size: 13px; line-height: 25px; font-weight: 400; }
 .VPSidebar .VPSidebarItem.level-1.is-active > .item { background: var(--vp-c-brand-soft); }
 .VPSidebar .VPSidebarItem.level-1.is-active > .item .text { font-weight: 550; }
-.lab-product { display: flex; gap: 10px; align-items: center; padding: 13px 11px; border: 1px solid var(--vp-c-divider); border-radius: 7px; background: var(--vp-c-bg); margin: 0 -4px 13px; }
-.lab-product-symbol { color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); width: 33px; height: 36px; padding: 6px; border-radius: 5px; }
-.lab-product strong { display: block; font-size: 13px; font-weight: 650; line-height: 21px; }
-.lab-product small { display: block; font-size: 10px; color: var(--vp-c-text-3); line-height: 18px; }
-.lab-product-arrow { margin-left: auto; color: var(--vp-c-text-3); font-size: 14px; }
-.lab-version { display: flex; align-items: center; justify-content: space-between; color: var(--vp-c-text-3); font-size: 11px; margin: 0 7px 25px; }
-.lab-version-tag { display: inline-flex; align-items: center; gap: 6px; color: var(--vp-c-text-2); font-family: Consolas,monospace; font-size: 11px; }
-.lab-version-tag i,.lab-status i { width: 5px; height: 5px; border-radius: 50%; background: #10a875; display: inline-block; }
+
+/* 侧栏顶部：产品卡（用 .VPSidebar 提高优先级，覆盖默认链接样式） */
+.VPSidebar .lab-product { display: flex; gap: 9px; align-items: center; padding: 12px 10px; border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); background: var(--vp-c-bg); margin: 0 -4px 12px; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.VPSidebar .lab-product:hover { border-color: var(--vp-c-brand-1); box-shadow: var(--lab-shadow); }
+.VPSidebar .lab-product-symbol { flex: none; color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); width: 32px; height: 34px; padding: 5px; border-radius: 6px; }
+.VPSidebar .lab-product-text { flex: 1; min-width: 0; }
+.VPSidebar .lab-product strong { display: block; font-size: 12.5px; font-weight: 650; line-height: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.VPSidebar .lab-product small { display: block; font-size: 10.5px; color: var(--vp-c-text-3); line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.VPSidebar .lab-product-arrow { margin-left: auto; color: var(--vp-c-text-3); font-size: 13px; }
+.lab-version { display: flex; align-items: center; justify-content: space-between; color: var(--vp-c-text-3); font-size: 11.5px; margin: 0 6px 22px; }
+.lab-version-tag { display: inline-flex; align-items: center; gap: 6px; color: var(--vp-c-text-2); font-family: Consolas, monospace; font-size: 11px; }
+.lab-version-tag i { width: 5px; height: 5px; border-radius: 50%; background: #10a875; display: inline-block; }
+
+/* ===== 正文容器 ===== */
 .VPDoc .content-container { max-width: 820px !important; }
 .VPDoc .aside { width: 210px; }
 .VPDocAsideOutline .content { border-left-color: var(--vp-c-divider); }
-.VPDocAsideOutline .outline-title,.VPDocAsideOutline .outline-link { font-size: 12px; }
-.lab-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--vp-c-text-3); margin: 0 0 19px; }
+.VPDocAsideOutline .outline-title, .VPDocAsideOutline .outline-link { font-size: 12px; }
+
+/* ===== 页面元信息：面包屑 + 状态条 ===== */
+.lab-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vp-c-text-3); margin: 0 0 13px; }
+.lab-breadcrumb a { color: var(--vp-c-text-3); text-decoration: none; }
 .lab-breadcrumb a:hover { color: var(--vp-c-brand-1); }
-.lab-page-meta { display: flex; align-items: center; gap: 13px; color: var(--vp-c-text-3); font-size: 11px; margin: 0 0 15px; }
-.lab-status { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; border: 1px solid var(--vp-c-divider); border-radius: 4px; }
-.lab-status[data-status=draft] i { background: #d29a37; }
-.lab-status[data-status=review] i { background: #5688d3; }
-.vp-doc h1 { font-size: 30px; line-height: 1.5; letter-spacing: -.7px; font-weight: 650; }
-.vp-doc h2 { font-size: 21px; font-weight: 620; margin-top: 36px; padding-top: 22px; }
-.vp-doc h3 { font-size: 17px; font-weight: 600; }
-.vp-doc p,.vp-doc li { font-size: 14px; line-height: 1.95; }
-.vp-doc th,.vp-doc td { font-size: 13px; line-height: 1.8; padding: 10px 15px; }
-.vp-doc th { background: var(--vp-c-bg-soft); font-weight: 600; }
-.vp-doc tr:nth-child(2n) { background: transparent; }
-.vp-doc table { display: block; overflow-x: auto; }
-.vp-doc div[class*=language-] { border: 1px solid var(--vp-c-divider); border-radius: 6px; }
-.vp-doc .custom-block { border-radius: 6px; font-size: 13px; }
+
+.lab-statusbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 9px 13px; border: 1px solid var(--vp-c-divider); border-left-width: 3px; border-left-color: var(--vp-c-divider); border-radius: var(--lab-radius); font-size: 12px; margin: 0 0 7px; }
+.lab-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 1px 9px; border-radius: 5px; font-size: 11.5px; font-weight: 600; color: var(--lab-on-solid); background: var(--vp-c-text-3); white-space: nowrap; }
+.lab-status-meta { color: var(--vp-c-text-2); }
+.lab-status-meta i { font-style: normal; margin: 0 6px; color: var(--vp-c-text-3); }
+.lab-status-edit { margin-left: auto; font-size: 11.5px; color: var(--vp-c-brand-1); text-decoration: none; white-space: nowrap; }
+.lab-status-edit:hover { text-decoration: underline; }
+.lab-statusbar[data-status=draft] { background: var(--lab-warn-bg); border-color: var(--lab-warn-line); border-left-color: var(--lab-warn); }
+.lab-statusbar[data-status=draft] .lab-status-badge { background: var(--lab-solid-warn); }
+.lab-statusbar[data-status=review] { background: var(--lab-info-bg); border-color: var(--lab-info-line); border-left-color: var(--lab-info); }
+.lab-statusbar[data-status=review] .lab-status-badge { background: var(--lab-solid-info); }
+.lab-statusbar[data-status=verified] { background: var(--lab-ok-bg); border-color: var(--lab-ok-line); border-left-color: var(--lab-ok); }
+.lab-statusbar[data-status=verified] .lab-status-badge { background: var(--lab-solid-ok); }
+.lab-statusdesc { margin: 0 0 26px; color: var(--vp-c-text-3); font-size: 12px; line-height: 1.7; }
+
+/* 状态条与说明占位在正文最前，紧跟其后的 h1 需要额外的上间距，
+   否则标题会贴在说明文字下面，读起来像同一段。 */
+.lab-statusdesc + h1, .lab-statusbar + h1 { margin-top: 26px; }
+
+/* ===== 正文排版 ===== */
+.vp-doc h1 { font-size: 30px; line-height: 1.45; letter-spacing: -.7px; font-weight: 650; }
+/* h2 上方的分割线拉满整行、并与标题保持呼吸感；线色比正文分隔线更淡，
+   避免一页出现多条同等重量的横线。 */
+.vp-doc h2 { font-size: 21px; font-weight: 620; margin-top: 44px; padding-top: 24px; letter-spacing: -.2px; }
+.vp-doc h2::before { content: ''; display: block; }
+.vp-doc h3 { font-size: 16.5px; font-weight: 600; margin-top: 26px; }
+.vp-doc p, .vp-doc li { font-size: 14.5px; line-height: 1.9; }
+.vp-doc p { margin: 13px 0; }
 .vp-doc a { text-underline-offset: 4px; }
-.vp-doc a:focus-visible,button:focus-visible,.lab-product:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 4px; }
+.vp-doc a:focus-visible, button:focus-visible, .lab-product:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 4px; }
+
+/* 首段导语：只作用于首页（.lab-home）——内容页 h1 后面的第一段是正文，
+   加重会打乱正文层级。首页这句"一句话说明站点定位"值得更醒目。 */
+.lab-home .vp-doc h1 + p { font-size: 15.5px; line-height: 1.85; color: var(--vp-c-text-2); margin: 14px 0 26px; }
+
+/* 列表：中文正文行高较大，列表项之间留一点缝，避免挤成一团 */
+.vp-doc ul, .vp-doc ol { padding-left: 1.35em; }
+.vp-doc li + li { margin-top: 5px; }
+.vp-doc li > p { margin: 0; }
+
+/* ===== 表格 ===== */
+.vp-doc table { display: table; width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); overflow: hidden; margin: 14px 0; }
+.vp-doc th { background: var(--vp-c-bg-soft); font-size: 12.5px; font-weight: 600; text-align: left; }
+.vp-doc th, .vp-doc td { padding: 9px 14px; border-bottom: 1px solid var(--vp-c-divider); font-size: 13px; line-height: 1.75; }
+.vp-doc tr:last-child td { border-bottom: 0; }
+.vp-doc tbody tr:hover td { background: var(--vp-c-bg-soft); }
+
+/* ===== 代码块 ===== */
+.vp-doc div[class*='language-'] { border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); background: var(--vp-c-bg-alt); }
+.vp-doc [class*='language-'] > span.lang { font-size: 11px; opacity: .7; }
+.vp-doc [class*='language-'] > button.copy { opacity: .5; border-radius: 5px; }
+.vp-doc [class*='language-']:hover > button.copy, .vp-doc [class*='language-'] > button.copy:focus { opacity: 1; }
+.vp-doc div[class*='language-'] code { font-size: 12.5px; }
+
+/* ===== 提示框（info / tip / warning / danger） ===== */
+.vp-doc .custom-block { padding: 13px 16px; border: 1px solid; border-left-width: 3px; border-radius: var(--lab-radius); font-size: 13px; line-height: 1.8; margin: 14px 0; }
+.vp-doc .custom-block .custom-block-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.vp-doc .custom-block p { font-size: 13px; line-height: 1.8; margin: 0; }
+.vp-doc .custom-block.info { background: var(--lab-info-bg); border-color: var(--lab-info-line); border-left-color: var(--lab-info); }
+.vp-doc .custom-block.info .custom-block-title { color: var(--lab-info); }
+.vp-doc .custom-block.tip { background: var(--lab-tip-bg); border-color: var(--lab-tip-line); border-left-color: var(--lab-tip); }
+.vp-doc .custom-block.tip .custom-block-title { color: var(--lab-tip); }
+.vp-doc .custom-block.warning { background: var(--lab-warn-bg); border-color: var(--lab-warn-line); border-left-color: var(--lab-warn); }
+.vp-doc .custom-block.warning .custom-block-title { color: var(--lab-warn); }
+.vp-doc .custom-block.danger { background: var(--lab-danger-bg); border-color: var(--lab-danger-line); border-left-color: var(--lab-danger); }
+.vp-doc .custom-block.danger .custom-block-title { color: var(--lab-danger); }
+
+/* ===== 页面末尾：反馈条 + 页脚 ===== */
+.lab-page-end { margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--vp-c-divider); }
+.lab-feedback { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 16px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); border-radius: var(--lab-radius); font-size: 12.5px; }
+.lab-feedback-text { flex: 1; min-width: 240px; color: var(--vp-c-text-2); line-height: 1.7; }
+.lab-feedback-text b { color: var(--vp-c-text-1); font-weight: 600; }
+.vp-doc .lab-feedback-btn { padding: 6px 12px; border-radius: 5px; font-size: 12px; color: var(--lab-on-solid) !important; background: var(--lab-solid); text-decoration: none; white-space: nowrap; }
+.vp-doc .lab-feedback-btn:hover { color: var(--lab-on-solid) !important; background: var(--lab-solid-hover); }
+.lab-feedback-link { font-size: 12px; color: var(--vp-c-brand-1); text-decoration: none; white-space: nowrap; }
+.lab-feedback-link:hover { text-decoration: underline; }
+.lab-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin-top: 18px; font-size: 11.5px; color: var(--vp-c-text-3); }
+.lab-footer a { color: var(--vp-c-text-2); text-decoration: none; }
+.lab-footer a:hover { color: var(--vp-c-brand-1); }
+.lab-footer .lab-footer-spacer { margin-left: auto; }
+
+/* ===== 首页 ===== */
 .lab-home .content-container { max-width: 900px !important; }
-.lab-home .lab-breadcrumb { margin-bottom: 35px; }
+.lab-home .lab-breadcrumb { margin-bottom: 30px; }
 .lab-intro { padding-bottom: 10px; }
-.lab-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--vp-c-text-3); }
+.lab-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.8px; color: var(--vp-c-text-3); }
 .vp-doc .lab-intro h1 { font-size: 39px; letter-spacing: -1.5px; line-height: 1.4; margin-top: 13px; }
 .lab-title-dot { color: var(--vp-c-brand-1); margin-left: 4px; }
-.vp-doc .lab-intro p { color: var(--vp-c-text-2); font-size: 14px; margin: 15px 0 21px; line-height: 2; }
+.vp-doc .lab-intro p { color: var(--vp-c-text-2); font-size: 14.5px; margin: 15px 0 21px; line-height: 2; }
 .lab-intro-actions { display: flex; gap: 21px; align-items: center; flex-wrap: wrap; }
-.vp-doc .lab-primary,.vp-doc .lab-secondary { display: inline-flex; gap: 18px; align-items: center; text-decoration: none; font-size: 12px; font-weight: 500; }
-.vp-doc .lab-primary { color: white; background: #2563eb; padding: 9px 16px; border-radius: 5px; transition: background .15s; }
-.vp-doc .lab-primary:hover { background: #1d4ed8; }
+.vp-doc .lab-primary, .vp-doc .lab-secondary { display: inline-flex; gap: 18px; align-items: center; text-decoration: none; font-size: 12px; font-weight: 500; }
+/* 用 a.lab-primary 提高优先级，覆盖 VitePress 默认的 .vp-doc a:hover 文字色；
+   hover 时也必须重申 color，否则文字会被默认蓝色盖掉，在蓝色底上看不见。 */
+.vp-doc a.lab-primary { color: var(--lab-on-solid); background: var(--lab-solid); padding: 9px 16px; border-radius: 5px; transition: background .15s, box-shadow .15s; }
+.vp-doc a.lab-primary:hover { color: var(--lab-on-solid); background: var(--lab-solid-hover); box-shadow: 0 2px 10px rgba(37, 99, 235, .28); }
 .vp-doc .lab-secondary { color: var(--vp-c-text-2); }
-.lab-flow { margin-top: 29px; padding: 15px 0 22px; display: flex; gap: 13px; flex-wrap: wrap; align-items: center; font-size: 10px; color: var(--vp-c-text-3); border-bottom: 1px solid var(--vp-c-divider); }
+.lab-flow { margin-top: 27px; padding: 15px 0 20px; display: flex; gap: 13px; flex-wrap: wrap; align-items: center; font-size: 11.5px; color: var(--vp-c-text-3); border-bottom: 1px solid var(--vp-c-divider); }
 .lab-flow b { font-weight: 400; color: var(--vp-c-text-3); }
 .lab-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 24px 0 16px; }
 .vp-doc .lab-section-heading h2 { border: 0; padding: 0; margin: 0; font-size: 17px; }
-.lab-section-heading > span { color: var(--vp-c-text-3); font-size: 10px; }
-.lab-catalog { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
-.lab-module { border: 1px solid var(--vp-c-divider); border-radius: 7px; padding: 19px 18px 14px; transition: border-color .2s; }
-.lab-module:hover { border-color: var(--vp-c-brand-1); }
+.lab-section-heading > span { color: var(--vp-c-text-3); font-size: 11px; }
+.lab-catalog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+/* 卡片：默认极淡底 + 细边，hover 时抬升并描边变色，给"可点"的明确反馈。
+   focus-within 让键盘用户也能看到当前卡片。 */
+.lab-module { position: relative; border: 1px solid var(--vp-c-divider); border-radius: var(--lab-radius); padding: 19px 18px 14px; background: var(--vp-c-bg); transition: border-color .2s, box-shadow .2s, transform .2s, background .2s; }
+.lab-module:hover, .lab-module:focus-within { border-color: var(--vp-c-brand-1); box-shadow: var(--lab-shadow); transform: translateY(-2px); background: var(--vp-c-bg); }
+/* 顶部一条 2px 品牌色细线，hover 时从左侧展开，给卡片一点方向感 */
+.lab-module::before { content: ''; position: absolute; inset: -1px -1px auto; height: 2px; border-radius: var(--lab-radius) var(--lab-radius) 0 0; background: var(--vp-c-brand-1); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.lab-module:hover::before, .lab-module:focus-within::before { transform: scaleX(1); }
 .lab-module-heading { display: flex; gap: 10px; align-items: center; }
-.lab-module-number { font-family: Consolas,monospace; font-size: 11px; color: var(--vp-c-brand-1); padding: 2px 6px; background: var(--vp-c-brand-soft); border-radius: 4px; }
+.lab-module-number { font-family: Consolas, monospace; font-size: 11px; color: var(--vp-c-brand-1); padding: 2px 6px; background: var(--vp-c-brand-soft); border-radius: 4px; }
 .vp-doc .lab-module h3 { margin: 0; font-size: 14px; line-height: 25px; font-weight: 600; }
-.vp-doc .lab-module p { font-size: 11px; color: var(--vp-c-text-3); margin: 7px 0 12px; }
+.vp-doc .lab-module p { font-size: 12px; color: var(--vp-c-text-3); margin: 7px 0 12px; }
 .vp-doc .lab-module ul { list-style: none; padding: 0; margin: 0; }
 .vp-doc .lab-module li { margin: 0; padding: 0; }
-.vp-doc .lab-module a { display: flex; align-items: center; gap: 7px; padding: 5px 0; font-size: 12px; font-weight: 400; color: var(--vp-c-text-2); text-decoration: none; line-height: 1.7; }
-.lab-module a svg { width: 13px; height: 13px; flex: none; color: var(--vp-c-text-3); }
-.vp-doc .lab-module a:hover { color: var(--vp-c-brand-1); }
-.lab-link-arrow { margin-left: auto; opacity: 0; color: var(--vp-c-brand-1); }
-.lab-module a:hover .lab-link-arrow,.lab-module a:focus-visible .lab-link-arrow { opacity: 1; }
-.lab-bottom-note { margin-top: 23px; border-top: 1px solid var(--vp-c-divider); padding-top: 20px; display: flex; align-items: start; gap: 12px; }
+.vp-doc .lab-module li + li { margin-top: 0; }
+.vp-doc .lab-module a { display: flex; align-items: center; gap: 7px; padding: 5px 6px; margin: 0 -6px; border-radius: 5px; font-size: 12.5px; font-weight: 400; color: var(--vp-c-text-2); text-decoration: none; line-height: 1.7; transition: background .15s, color .15s; }
+.vp-doc .lab-module a:hover { color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); }
+.lab-module a svg { width: 13px; height: 13px; flex: none; color: var(--vp-c-text-3); transition: color .15s; }
+.lab-module a:hover svg { color: var(--vp-c-brand-1); }
+.lab-link-arrow { margin-left: auto; opacity: 0; color: var(--vp-c-brand-1); transition: opacity .15s; }
+.lab-module a:hover .lab-link-arrow, .lab-module a:focus-visible .lab-link-arrow { opacity: 1; }
+.lab-bottom-note { margin-top: 23px; border-top: 1px solid var(--vp-c-divider); padding-top: 20px; display: flex; align-items: flex-start; gap: 12px; }
 .lab-bottom-mark { font-size: 20px; color: var(--vp-c-text-3); }
-.lab-bottom-note strong { font-size: 11px; font-weight: 550; }
-.vp-doc .lab-bottom-note p { color: var(--vp-c-text-3); font-size: 10px; margin: 3px 0 0; }
-.vp-doc .lab-bottom-note > a { white-space: nowrap; margin-left: auto; font-size: 10px; text-decoration: none; }
-@media (min-width:960px) { .VPDoc { padding-top: 36px !important; } .VPNavBar .title { border-bottom: 0; } }
-@media (min-width:1440px) { .VPSidebar { padding-left: 28px !important; } .VPNavBar.has-sidebar .title { padding-left: 28px !important; } }
-@media (max-width:1279px) and (min-width:960px) { .VPDoc .content { padding: 0 24px; } }
-@media (max-width:639px) { .vp-doc .lab-intro h1 { font-size: 30px; } .lab-catalog { grid-template-columns: 1fr; } .lab-bottom-note { flex-wrap: wrap; } .vp-doc .lab-bottom-note > a { margin-left: 32px; } .desktop-break { display: none; } .vp-doc h1 { font-size: 26px; } .lab-flow { gap: 8px; } }
-@media (prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } * { transition-duration: 0s !important; } }
+.lab-bottom-note strong { font-size: 12px; font-weight: 550; }
+.vp-doc .lab-bottom-note p { color: var(--vp-c-text-3); font-size: 11.5px; margin: 3px 0 0; }
+.vp-doc .lab-bottom-note > a { white-space: nowrap; margin-left: auto; font-size: 11.5px; text-decoration: none; color: var(--vp-c-brand-1); }
+
+/* ===== 404 ===== */
+.NotFound { padding: 88px 24px 72px !important; text-align: center; }
+.NotFound .code { font-size: 84px !important; line-height: 1.1 !important; font-weight: 700 !important; letter-spacing: -3px; color: var(--vp-c-text-1); }
+.NotFound .title { padding-top: 10px !important; font-size: 20px !important; letter-spacing: .5px !important; }
+.NotFound .divider { margin: 22px auto 18px !important; width: 56px !important; }
+.NotFound .quote { max-width: 320px !important; font-size: 13.5px !important; line-height: 1.8; }
+.NotFound .action { padding-top: 22px !important; }
+.NotFound .link { border-radius: 6px !important; padding: 6px 16px !important; font-size: 13px !important; }
+
+/* ===== 响应式 ===== */
+@media (min-width: 960px) {
+  .VPDoc { padding-top: 36px !important; }
+  .VPNavBar .title { border-bottom: 0; }
+}
+/* 1440px 以上侧栏宽度和左内边距交给 VitePress 的居中公式计算，
+   不再手动覆盖 padding，避免超宽屏下侧栏与正文错位。 */
+@media (max-width: 1279px) and (min-width: 960px) {
+  .VPDoc .content { padding: 0 24px; }
+}
+@media (max-width: 767px) {
+  .vp-doc table { display: block; width: 100%; overflow-x: auto; white-space: nowrap; }
+  .vp-doc th, .vp-doc td { white-space: nowrap; }
+  .lab-statusbar { row-gap: 4px; }
+  .lab-status-edit { flex-basis: 100%; margin-left: 0; }
+}
+@media (max-width: 639px) {
+  .vp-doc .lab-intro h1 { font-size: 30px; }
+  .lab-catalog { grid-template-columns: 1fr; }
+  .lab-bottom-note { flex-wrap: wrap; }
+  .vp-doc .lab-bottom-note > a { margin-left: 32px; }
+  .desktop-break { display: none; }
+  .vp-doc h1 { font-size: 26px; }
+  .lab-flow { gap: 8px; }
+  .lab-footer .lab-footer-spacer { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0s !important; }
+}

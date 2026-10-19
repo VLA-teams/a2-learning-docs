@@ -1,40 +1,81 @@
 # A2 学习与开发文档中心
 
-独立项目：F:\Deepseek\project_6\a2-learning-docs。
+具身智能实验室的 A2 学习与开发文档站，按「机器人平台 / 环境配置 / 仿真与运动控制 / VLA 模型部署 / 实验操作手册 / 版本与更新」六个栏目组织，把配置、验证和解决问题的过程沉淀下来。
 
-参考文档站的顶部导航、左侧章节、正文与右侧页内目录。六栏目按参考图片组织，首页和侧栏共用目录配置。
+- 线上文档：<https://yuxiongtao666.github.io/a2-learning-docs/>
+- 代码仓库：<https://github.com/yuxiongtao666/a2-learning-docs>
 
-## 本地启动
+## 协作方式（推荐：GitHub 网页）
 
-安装 Node.js 22，在 PowerShell 执行：
+组员**不需要安装 Git 或 Node.js**，只要有自己的 GitHub 账号，全部在浏览器里完成：
 
-~~~powershell
-cd F:\Deepseek\project_6\a2-learning-docs
-npm ci
-npm run docs:dev
+~~~text
+维护者邀请成员 → 成员网页修改 Markdown、提交 PR
+→ 自动检查 → 维护者审核合并 → 网站自动更新
 ~~~
 
-打开终端显示的本地地址，默认 http://127.0.0.1:5173/。也可以双击「启动网站.cmd」。
+- 组员：阅读 [docs/contribute.md](docs/contribute.md)，按步骤接受邀请、编辑页面、提交 PR。
+- 维护者：邀请成员、保护 `main`、审核合并，见 [docs/deployment.md](docs/deployment.md)。
+- 先只修改已有页面；新增页面需要注册到 `docs/.vitepress/theme/catalog.json`，暂由维护者统一处理。
 
-~~~powershell
-npm run check
-npm run docs:preview
+**当前状态**：邀请组员、保护 `main`、试点 PR 尚未执行，等新版本上传 GitHub 后按 `docs/deployment.md` 第二～四节完成。
+
+## 项目结构
+
+~~~text
+.
+├─ docs/                          # 站点内容（Markdown 源码）
+│  ├─ .vitepress/
+│  │  ├─ config.mts               # 站点配置：标题、导航、侧栏、搜索
+│  │  └─ theme/                   # 自定义主题、目录配置与样式
+│  │     ├─ catalog.json          # 六栏目目录（侧栏与首页共用）
+│  │     └─ components/           # LabHome / LabHeader / PageMeta
+│  ├─ platform/ setup/ simulation/ vla/ handbook/ updates/   # 六栏目
+│  ├─ guide/                      # 快速开始
+│  ├─ index.md                    # 首页
+│  ├─ contribute.md               # 如何更新文档（组员）
+│  └─ deployment.md               # 发布与部署（维护者）
+├─ scripts/check-content.mjs      # frontmatter 与站内链接检查
+├─ templates/page.md              # 新建页面模板
+├─ .github/workflows/             # PR 检查 + 自动部署
+└─ 启动网站.cmd                   # Windows 一键本地预览
 ~~~
 
 ## 内容与主题
 
-- 内容：docs/platform、setup、simulation、vla、handbook、updates。
-- 目录与首页入口：docs/.vitepress/theme/catalog.json。
-- 样式：docs/.vitepress/theme/custom.css 与 components/。
-- 模板：templates/page.md。
-- 协作：docs/contribute.md；部署：docs/deployment.md。
+- 内容目录：`docs/platform`、`setup`、`simulation`、`vla`、`handbook`、`updates`。
+- 目录与首页入口：`docs/.vitepress/theme/catalog.json`，左侧栏和首页卡片共用。
+- 样式：`docs/.vitepress/theme/custom.css` 与 `components/`。
+- 页面模板：`templates/page.md`。
 
-## GitHub Pages
+## 本地开发（可选）
 
-新建仓库，提交到 main；Settings → Pages → Source 选择 GitHub Actions。工作流自动获取真实仓库与路径。PR 检查通过并合并后自动部署。
+安装 Node.js 22，在项目目录执行：
 
-建议使用小组 Organization，组员 Write 权限；保护 main，要求 PR、至少一人批准及 check 检查通过。
+~~~powershell
+npm ci
+npm run docs:dev      # 本地预览，默认 http://127.0.0.1:5173/
+npm run check         # 内容检查 + 构建
+npm run docs:preview  # 预览构建结果
+~~~
+
+Windows 也可以直接双击「启动网站.cmd」。
+
+## CI 与发布
+
+- PR：`.github/workflows/check.yml` 运行内容检查和构建，状态检查名称为 `check`。
+- 合并到 `main`：`.github/workflows/deploy.yml` 自动构建并发布 GitHub Pages。
+- 组员提交 PR 后等检查通过、维护者批准合并，网站会自动更新，无需手动上传。
 
 ## 内容状态
 
-技术页为待填写的学习与验证结构，尚未录入真实实机结果。用 draft / review / verified 区分状态。
+用 frontmatter 的 `status` 区分：`draft` 待完善、`review` 待复核、`verified` 已验证。技术页默认 `draft`，只有经过实机或实际环境验证后才改为 `verified`。
+
+## 安全约定
+
+公开仓库和公开网站上的所有内容任何人都能看到，提交历史同样公开。不要写入密码、SSH 私钥、Token、内网 IP、远控地址、设备序列号和组员隐私；需要写连接方式时使用 `<ROBOT_IP>`、`<SSH_USER>` 这类占位符，截图上传前打码。
+
+## 后续计划
+
+1. 上传新版本到 GitHub，按 `docs/deployment.md` 完成邀请成员、保护 `main`、试点 PR 测试。
+2. 页面视觉优化（暂缓，后续单独进行）。
