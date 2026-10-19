@@ -129,16 +129,25 @@ html { scroll-behavior: smooth; }
 .VPSidebar.VPSidebar {
   background-color: var(--vp-c-bg);
   border-right: 1px solid var(--vp-c-divider);
-  scrollbar-width: thin;
   padding-right: 12px;
   padding-left: 12px;
   padding-bottom: 16px;
 }
 
+/* 侧栏滚动条：Windows 上默认「始终显示」，会持续占掉约 11px 宽度，
+   导致条目右侧看起来比左边空。改成 thin + 半透明滑块，
+   并把轨道设为透明，视觉上更贴合侧栏背景。 */
+.VPSidebar.VPSidebar { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, .18) transparent; }
+.dark .VPSidebar.VPSidebar { scrollbar-color: rgba(255, 255, 255, .2) transparent; }
+.VPSidebar.VPSidebar::-webkit-scrollbar { width: 6px; height: 6px; }
+.VPSidebar.VPSidebar::-webkit-scrollbar-track { background: transparent; }
+.VPSidebar.VPSidebar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, .18); border-radius: 3px; }
+.VPSidebar.VPSidebar::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, .3); }
+.dark .VPSidebar.VPSidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .2); }
+.dark .VPSidebar.VPSidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .32); }
+
 /* 版本行：侧栏顶部唯一的内容。
-   "主要学习平台" 和版本胶囊都靠左排列、紧挨着，不再用 space-between
-   把胶囊推到最右边——侧栏收窄到 240px 后，右侧空间很紧，
-   推过去反而贴边显脏。 */
+   "主要学习平台" 靠左，版本胶囊用 margin-left: auto 靠右对齐。 */
 .lab-version {
   display: flex;
   align-items: center;
@@ -156,6 +165,7 @@ html { scroll-behavior: smooth; }
   align-items: center;
   gap: 6px;
   flex: 0 0 auto;
+  margin-left: auto;
   color: var(--vp-c-text-2);
   font-family: inherit;
   font-size: 13px;
@@ -166,6 +176,14 @@ html { scroll-behavior: smooth; }
   padding: 3px 9px;
 }
 .lab-version-tag i { width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block; }
+
+/* 侧栏分组：VitePress 内置规则把宽度写死成
+     .group { width: calc(var(--vp-sidebar-width) - 64px) }
+   这里的 64px 是按「左右各 32px 内边距」算的。我们把侧栏内边距收到
+   12px 后，实际可用宽度是 (侧栏宽 - 24px)，但组宽仍是 (侧栏宽 - 64px)，
+   凭空多出 40px 空隙——这就是侧栏条目右侧那条空白的来源。
+   改成 -24px 让组宽和实际内边距匹配。 */
+.VPSidebar .group { width: auto; }
 
 /* 侧栏分组标题：官方 13px、深色、字重 650 */
 .VPSidebar .group + .group { border-top: 1px solid var(--vp-c-divider); margin-top: 16px; padding-top: 16px; }
