@@ -7,7 +7,7 @@ date: 2026-10-17
 ---
 
 # ROS2 Humble 环境配置
-- [A2 开发手册（PDF）](/files/agibot-a2-5090-tutorial.pdf)
+
 记录工作空间、依赖和消息通信配置。
 
 ## 学习目标
