@@ -98,8 +98,16 @@ html { scroll-behavior: smooth; }
 }
 .dark .VPNavBar.VPNavBar .wrapper { background-color: rgba(11, 15, 23, .85); }
 .VPNavBar .container { padding: 0 16px; max-width: none; }
+/* 顶栏标题左对齐。
+   >=960px 时 VitePress 用下面这条把标题做成绝对定位的侧栏宽度块：
+     .VPNavBar.has-sidebar .title[data-v-xxx] { position: absolute; left: 0;
+                                                padding: 0 32px; width: var(--vp-sidebar-width) }
+   特异性 0,4,0（三个类 + 一个属性），单写 .VPNavBar .title（0,1,1）压不过它。
+   这里用 .VPNavBar.has-sidebar .title.title（0,4,0）与之持平，
+   靠本文件排在主题默认样式之后胜出，把 32px 左内边距收到 16px。 */
+.VPNavBar.has-sidebar .title.title { padding-left: 16px; padding-right: 8px; }
 .VPNavBar .title { font-size: 16px; letter-spacing: -.096px; gap: 10px; }
-.VPNavBarTitle .logo { height: 24px; width: 24px; }
+.VPNavBarTitle .logo { height: 24px; width: 24px; margin-right: 0; }
 .VPNavBar .content { padding-left: 16px; }
 .VPNavBar .VPNavBarMenuLink,
 .VPNavBar .VPNavBarMenuGroup .text { font-size: 15.2px; color: var(--vp-c-text-2); }
