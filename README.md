@@ -1,6 +1,6 @@
 # A2 学习与开发文档中心
 
-具身智能实验室的 A2 学习与开发文档站，按「机器人平台 / 环境配置 / 仿真与运动控制 / VLA 模型部署 / 实验操作手册 / 版本与更新」六个栏目组织，把配置、验证和解决问题的过程沉淀下来。
+机器人开发与学习知识库——A2 学习与开发文档站，按「机器人平台 / 环境配置 / 仿真与运动控制 / VLA 模型部署 / 实验操作手册 / 版本与更新」六个栏目组织，把配置、验证和解决问题的过程沉淀下来。
 
 - 线上文档：<https://yuxiongtao666.github.io/a2-learning-docs/>
 - 代码仓库：<https://github.com/yuxiongtao666/a2-learning-docs>
@@ -37,8 +37,7 @@
 │  └─ deployment.md               # 发布与部署（维护者）
 ├─ scripts/check-content.mjs      # frontmatter 与站内链接检查
 ├─ templates/page.md              # 新建页面模板
-├─ .github/workflows/             # PR 检查 + 自动部署
-└─ 启动网站.cmd                   # Windows 一键本地预览
+└─ .github/workflows/             # PR 检查 + 自动部署
 ~~~
 
 ## 内容与主题
@@ -58,8 +57,6 @@ npm run docs:dev      # 本地预览，默认 http://127.0.0.1:5173/
 npm run check         # 内容检查 + 构建
 npm run docs:preview  # 预览构建结果
 ~~~
-
-Windows 也可以直接双击「启动网站.cmd」。
 
 ## CI 与发布
 

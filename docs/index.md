@@ -1,7 +1,7 @@
 ---
 title: A2 学习与开发文档中心
 titleTemplate: false
-description: 具身智能实验室开发文档中心
+description: 机器人开发与学习知识库
 pageClass: lab-home
 outline: false
 aside: false

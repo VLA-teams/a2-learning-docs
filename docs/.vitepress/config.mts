@@ -14,7 +14,7 @@ export default defineConfig({
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: base + 'logo.svg' }]],
   markdown: { image: { lazyLoading: true } },
   themeConfig: {
-    logo: '/logo.svg', siteTitle: '具身智能实验室',
+    logo: '/logo.svg', siteTitle: '机器人开发与学习知识库',
     nav: [
       { text: '文档中心', link: '/', activeMatch: '^/(?!updates|contribute)' },
       { text: '更新日志', link: '/updates/changelog', activeMatch: '^/updates/' },

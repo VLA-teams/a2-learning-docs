@@ -24,7 +24,7 @@ const editLink = computed(() => {
       <a class="lab-feedback-link" :href="withBase('/contribute')">如何更新文档 →</a>
     </div>
     <div class="lab-footer">
-      <span>© {{ year }} 具身智能实验室 · A2 学习与开发文档中心</span>
+      <span>© {{ year }} 机器人开发与学习知识库</span>
       <a :href="withBase('/contribute')">如何更新文档</a>
       <a :href="withBase('/deployment')">发布与部署</a>
       <a :href="withBase('/updates/changelog')">更新日志</a>
