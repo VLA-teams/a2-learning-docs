@@ -146,37 +146,6 @@ html { scroll-behavior: smooth; }
 .dark .VPSidebar.VPSidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .2); }
 .dark .VPSidebar.VPSidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .32); }
 
-/* 版本行：侧栏顶部唯一的内容。
-   "主要学习平台" 靠左，版本胶囊用 margin-left: auto 靠右对齐。 */
-.lab-version {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-  color: var(--vp-c-text-3);
-  font-size: 13px;
-  margin: 0 0 16px;
-  padding: 0 2px;
-  min-width: 0;
-}
-.lab-version > span:first-child { flex: 0 1 auto; min-width: 0; }
-.lab-version-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex: 0 0 auto;
-  margin-left: auto;
-  color: var(--vp-c-text-2);
-  font-family: inherit;
-  font-size: 13px;
-  white-space: nowrap;
-  background: var(--vp-c-bg-alt);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  padding: 3px 9px;
-}
-.lab-version-tag i { width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block; }
-
 /* 侧栏分组：VitePress 内置规则把宽度写死成
      .group { width: calc(var(--vp-sidebar-width) - 64px) }
    这里的 64px 是按「左右各 32px 内边距」算的。我们把侧栏内边距收到
