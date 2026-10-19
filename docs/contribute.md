@@ -125,7 +125,93 @@ date: 2026-10-17
 - 尚未实机验证的内容保持 `status: draft`，不要标成 `verified`；
 - 站内链接写成 `/setup/ros2-humble` 这种路径，不要写完整网址；
 - 图片放在 `docs/public/images/`，正文用 `/images/文件名.png` 引用；
+- PDF、数据集等附件放在 `docs/public/files/`，正文用 `/files/文件名.pdf` 引用；
 - 一次 PR 只改一个主题，方便审核和回滚。
+
+## 上传 PDF 和附件
+
+PDF 手册、数据表、检查清单这类文件，**全部组员都可以上传**，同样走 GitHub 网页，不需要安装任何工具。
+
+### 规则
+
+| 项目 | 要求 |
+| --- | --- |
+| 存放位置 | `docs/public/files/` |
+| 引用路径 | `/files/文件名.pdf`（以 `/` 开头） |
+| 文件名 | **用英文或拼音**，不要中文、空格、`#`、`?` |
+| 单个文件大小 | 建议 **不超过 25 MB**（GitHub 网页上传上限） |
+| 内容 | 必须是可公开的资料，见下方安全提醒 |
+
+### 操作步骤
+
+**1. 确认目录存在**
+
+在仓库网页依次点开 `docs` → `public` → `files`。
+如果 `files` 不存在，点 **Add file → Create new file**，文件名填 `files/README.md`，
+内容写一行说明，提交后目录就建好了（或直接告诉维护者，由维护者创建）。
+
+**2. 上传 PDF**
+
+1. 进入 `docs/public/files/` 目录；
+2. 点右上角 **Add file** → **Upload files**；
+3. 把 PDF 拖进虚线框，或点 **choose your files** 选择；
+4. 在下方 **Commit changes** 里：
+   - 提交说明写 `docs: 上传 A2 开发手册 PDF`；
+   - 选择 **Create a new branch for this commit and start a pull request**；
+   - 分支名 `docs/<你的名字>-pdf`，例如 `docs/zhangsan-pdf`；
+5. 点 **Propose changes**，然后按[修改已有页面](#修改已有页面推荐流程)的第 4–6 步创建 PR、等检查、等审核。
+
+**3. 在页面里引用**
+
+在对应的 `.md` 页面里加一行链接：
+
+~~~markdown
+- [A2 v2.1 开发手册（PDF，8.2 MB）](/files/a2-dev-guide.pdf)
+~~~
+
+保存后按同样的 PR 流程提交。**注意：上传 PDF 和修改页面可以是同一个 PR，也可以分两个 PR。**
+
+### 为什么文件名要用英文
+
+中文文件名在网址里会被编码成一长串 `%E4%B8%AD%E6%96%87`，
+分享出去的链接很难看，部分浏览器和聊天工具还会把它截断。
+例如 `A2开发手册.pdf` 会变成：
+
+~~~text
+/files/A2%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C.pdf
+~~~
+
+推荐写法：`a2-dev-guide.pdf`、`a2-manual-v2.1.pdf`、`checklist-arm.pdf`。
+
+### 文件太大怎么办
+
+GitHub 网页上传**单个文件上限 25 MB**。超过这个大小，网页上传会直接失败。
+
+| 文件大小 | 做法 |
+| --- | --- |
+| ≤ 25 MB | 网页直接上传（推荐，最简单） |
+| 25–100 MB | 需要用 Git 命令行推送，或请维护者代传 |
+| > 100 MB | **不要放仓库**，改用外部网盘 / 对象存储，文档里只放链接 |
+
+超过 25 MB 但确实要放进仓库时，只能走本地 Git（需要安装 Git）：
+
+~~~bash
+git clone https://github.com/yuxiongtao666/a2-learning-docs.git
+cd a2-learning-docs
+# 把 PDF 复制到 docs/public/files/ 目录下
+git switch -c docs/zhangsan-pdf
+git add docs/public/files/你的文件.pdf
+git commit -m "docs: 上传 XXX PDF"
+git push -u origin docs/zhangsan-pdf
+~~~
+
+然后在 GitHub 网页上从 `docs/zhangsan-pdf` 分支创建 PR。
+
+::: warning PDF 同样是公开的
+`docs/public/` 下的文件会被原样发布到公开网站，**任何人都能直接下载**。
+上传前确认 PDF 里没有密码、内网 IP、设备序列号、未公开的内部资料。
+厂商手册请确认可以公开转载；不确定就先问维护者。
+:::
 
 ### 安全红线
 
@@ -149,6 +235,10 @@ date: 2026-10-17
 | PR 提示有冲突 | 修改的页面在 `main` 上也被改过 | 联系维护者，或按 GitHub 提示解决 |
 | 合并后网站没更新 | 部署还在进行或失败 | 看 Actions 结果，等 1–2 分钟后强制刷新 |
 | 想新增页面 | 需要注册到 `catalog.json` | 先在群里说明，由维护者统一添加 |
+| 上传 PDF 时提示文件太大 | 网页上传单文件上限 25 MB | 压缩 PDF，或改用 Git 命令行，或联系维护者代传 |
+| PDF 上传后链接打不开（404） | 文件不在 `docs/public/files/` 下 | 确认路径是 `docs/public/files/文件名.pdf` |
+| PDF 链接被检查判为死链 | 文件名写错，或文件还没提交 | 核对 `/files/` 后面的文件名，注意大小写 |
+| PDF 链接里出现 `%E4%B8%AD` | 文件名用了中文 | 改成英文或拼音文件名 |
 | 自己的 PR 无法点 Approve | GitHub 不允许自己批准自己的 PR | 正常现象，等维护者批准即可 |
 | PR 页面显示「This branch has not been deployed」 | PR 阶段只跑检查、不部署 | 正常现象，合并后才会部署 |
 
