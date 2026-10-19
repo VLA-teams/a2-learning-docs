@@ -83,7 +83,12 @@ for (const file of pages) {
   }
 
   // 6) 站内链接（无论 frontmatter 是否通过都要查）
-  const body = body0.replace(/~~~[\s\S]*?~~~/g, '')
+  //    先剥掉两类「示例代码」，否则文档里演示写法用的链接会被误报为死链：
+  //    1) ~~~ 围起来的代码块；
+  //    2) `行内代码`，例如表格里写的 `![说明](/images/x.png)`。
+  const body = body0
+    .replace(/~~~[\s\S]*?~~~/g, '')
+    .replace(/`[^`\n]*`/g, '')
   for (const match of body.matchAll(/\]\(([^\s)]+)\)/g)) checkLink(match[1], file)
 }
 
