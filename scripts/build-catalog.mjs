@@ -3,10 +3,10 @@
 // 规则：
 //   - 六个栏目（platform/setup/simulation/vla/handbook/updates）由下方 GROUPS 固定，
 //     编号和栏目名不随文件变化。
-//   - 栏目下的页面通过扫描 .md 自动发现，无需手工登记。
+//   - 栏目下的页面（包括子目录）通过递归扫描 .md 自动发现，无需手工登记。
 //   - 排序依据 frontmatter 的 order（数字，小的在前）；没写 order 的排在最后、按文件名排序。
 //   - 页面标题取 frontmatter 的 title，摘要取 description。
-//   - 文件名为 index.md 的是栏目概览页，不进列表。
+//   - 栏目根目录的 index.md 是概览页，不进列表；子目录的 index.md 正常收录。
 //
 // 组员只要新建 md 并写好 frontmatter，构建时就会自动出现在侧栏和首页。
 
@@ -49,15 +49,23 @@ function parseFrontmatter(content) {
   return data
 }
 
-/** 扫描一个栏目目录，返回条目数组 */
+/** 返回相对栏目根目录的页面路径；忽略隐藏目录与符号链接。 */
+function pageFiles(dir, prefix = '') {
+  return readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    if (entry.name.startsWith('.')) return []
+    const name = prefix + entry.name
+    if (entry.isDirectory()) return pageFiles(resolve(dir, entry.name), name + '/')
+    return entry.isFile() && entry.name.endsWith('.md') && name !== 'index.md' ? [name] : []
+  })
+}
+
+/** 递归扫描一个栏目目录，返回条目数组（仍平铺在该栏目下）。 */
 function collect(groupPath) {
   const dir = resolve(docs, groupPath)
   if (!existsSync(dir)) return []
 
   const items = []
-  for (const name of readdirSync(dir)) {
-    if (!name.endsWith('.md') || name === 'index.md') continue
-
+  for (const name of pageFiles(dir)) {
     const file = resolve(dir, name)
     const content = readFileSync(file, 'utf8')
     const fm = parseFrontmatter(content)
@@ -72,7 +80,7 @@ function collect(groupPath) {
       slug,
       text: fm.title || slug,
       description: fm.description || '',
-      link: '/' + groupPath + '/' + slug,
+      link: '/' + groupPath + '/' + slug.replace(/\/index$/, '/'),
       _order: Number.isFinite(order) ? order : Infinity,
       _name: name,
     })

@@ -90,7 +90,7 @@ for (const file of pages) {
 for (const group of catalog) for (const item of group.items) checkLink(item.link, 'catalog.json')
 
 // 7) 页面是否落在可被侧栏收录的位置
-//    catalog.json 由 build-catalog.mjs 自动生成，只扫描六个栏目目录；
+//    catalog.json 由 build-catalog.mjs 自动生成，递归扫描六个栏目目录；
 //    docs/ 根目录的说明页和 guide/（快速开始）在 config.mts 里单独注册，
 //    因此这里对它们豁免，其余位置的新页面会提示。
 const GROUP_DIRS = ['platform', 'setup', 'simulation', 'vla', 'handbook', 'updates']
