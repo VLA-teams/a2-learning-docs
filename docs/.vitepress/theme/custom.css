@@ -444,23 +444,30 @@ html { scroll-behavior: smooth; }
   border-radius: 10px;
   padding: 18px 18px 14px;
   background: var(--vp-c-bg);
+  /* 关键：裁掉伪元素的溢出部分，让顶部直线被圆角切出弧度。
+     不加这行时，::before 是一条直角矩形，两端会盖住卡片的 10px 圆角。 */
+  overflow: hidden;
   transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+/* 悬停：顶部一条 2px 品牌色直线，从左侧展开。
+   直线贴在卡片内边缘（inset: 0 0 auto），配合父级 overflow: hidden，
+   两端会被卡片的 border-radius 裁成弧形，不再戳出直角。 */
+.lab-module::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--vp-c-brand-1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
 }
 .lab-module:hover, .lab-module:focus-within {
   border-color: var(--vp-c-brand-1);
   box-shadow: var(--lab-shadow);
   transform: translateY(-2px);
-}
-.lab-module::before {
-  content: '';
-  position: absolute;
-  inset: -1px -1px auto;
-  height: 2px;
-  border-radius: 10px 10px 0 0;
-  background: var(--vp-c-brand-1);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .25s ease;
 }
 .lab-module:hover::before, .lab-module:focus-within::before { transform: scaleX(1); }
 .lab-module-heading { display: flex; gap: 10px; align-items: center; }
