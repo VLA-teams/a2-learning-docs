@@ -8,19 +8,19 @@
       {
         "slug": "agibot-a2",
         "text": "智元 A2 v2.1 开发指南",
-        "description": "建立整机、软件和开发接口的学习地图。",
+        "description": "智元 A2 v2.1 开发指南：学习、开发与验证记录",
         "link": "/platform/agibot-a2"
       },
       {
         "slug": "unitree-h2",
         "text": "宇树 H2 开发指南",
-        "description": "登记 H2 的设备版本、官方资料与接口。",
+        "description": "宇树 H2 开发指南：学习、开发与验证记录",
         "link": "/platform/unitree-h2"
       },
       {
         "slug": "communication",
         "text": "机器人通信与接口对比",
-        "description": "对齐不同平台的通信链路与数据约定。",
+        "description": "机器人通信与接口对比：学习、开发与验证记录",
         "link": "/platform/communication"
       }
     ]
@@ -34,19 +34,19 @@
       {
         "slug": "ubuntu-ssh-network",
         "text": "Ubuntu / SSH / 网络连接",
-        "description": "统一开发机环境与网络登录流程。",
+        "description": "Ubuntu / SSH / 网络连接：学习、开发与验证记录",
         "link": "/setup/ubuntu-ssh-network"
       },
       {
         "slug": "ros2-humble",
         "text": "ROS2 Humble 环境配置",
-        "description": "记录工作空间、依赖和消息通信配置。",
+        "description": "ROS2 Humble 环境配置：学习、开发与验证记录",
         "link": "/setup/ros2-humble"
       },
       {
         "slug": "aimdk",
         "text": "AimDK 安装和启动",
-        "description": "对齐官方版本，记录安装与启动过程。",
+        "description": "AimDK 安装和启动：学习、开发与验证记录",
         "link": "/setup/aimdk"
       }
     ]
@@ -60,32 +60,38 @@
       {
         "slug": "mujoco",
         "text": "MuJoCo 仿真平台",
-        "description": "建立模型加载、控制和日志的复现流程。",
+        "description": "MuJoCo 仿真平台：学习、开发与验证记录",
         "link": "/simulation/mujoco"
       },
       {
         "slug": "se3-control",
         "text": "双臂 SE(3) 位姿控制",
-        "description": "核对末端控制的坐标约定、接口与验证流程。",
+        "description": "双臂 SE(3) 位姿控制：学习、开发与验证记录",
         "link": "/simulation/se3-control"
       },
       {
         "slug": "dexterous-hand",
         "text": "灵巧手控制与抓取",
-        "description": "整理手部接口、预设动作和抓取验证。",
+        "description": "灵巧手控制与抓取：学习、开发与验证记录",
         "link": "/simulation/dexterous-hand"
       },
       {
         "slug": "a2-5090-recovery",
-        "text": "5090 重启后恢复手册",
-        "description": "意外关机或重启后，按顺序恢复仿真、运控与示教面板。",
+        "text": "5090 意外关机 / 重启后：AGIBOT A2 MuJoCo 与网页示教面板恢复手册",
+        "description": "RTX 5090 工作站意外关机或重启后，按顺序恢复 AGIBOT A2 的 MuJoCo 仿真、motion_control 与网页示教面板。",
         "link": "/simulation/a2-5090-recovery"
       },
       {
         "slug": "mobile-base",
         "text": "底盘行走与运动控制",
-        "description": "区分设备的移动模式与开放控制接口。",
+        "description": "底盘行走与运动控制：学习、开发与验证记录",
         "link": "/simulation/mobile-base"
+      },
+      {
+        "slug": "AGIBOT_A2_5090_Tutorial",
+        "text": "AGIBOT_A2_5090_小白教程.pdf",
+        "description": "小白教程",
+        "link": "/simulation/AGIBOT_A2_5090_Tutorial"
       }
     ]
   },
@@ -98,19 +104,19 @@
       {
         "slug": "posevla",
         "text": "PoseVLA 与模型架构",
-        "description": "整理论文、代码版本、模型输入及动作输出。",
+        "description": "PoseVLA 与模型架构：学习、开发与验证记录",
         "link": "/vla/posevla"
       },
       {
         "slug": "inference-service",
         "text": "模型推理服务部署",
-        "description": "建立可回放的推理服务与部署记录。",
+        "description": "模型推理服务部署：学习、开发与验证记录",
         "link": "/vla/inference-service"
       },
       {
         "slug": "closed-loop-eval",
         "text": "真实机器人闭环评估",
-        "description": "统一任务、起始条件、判据与运行日志。",
+        "description": "真实机器人闭环评估：学习、开发与验证记录",
         "link": "/vla/closed-loop-eval"
       }
     ]
@@ -124,19 +130,19 @@
       {
         "slug": "pick-cup",
         "text": "桌面抓杯子实验",
-        "description": "记录场景准备、感知、执行与抓取结果。",
+        "description": "桌面抓杯子实验：学习、开发与验证记录",
         "link": "/handbook/pick-cup"
       },
       {
         "slug": "perception",
         "text": "视觉感知与点云采集",
-        "description": "对齐图像、深度、点云、标定与时间戳。",
+        "description": "视觉感知与点云采集：学习、开发与验证记录",
         "link": "/handbook/perception"
       },
       {
         "slug": "troubleshooting",
         "text": "故障排查与解决记录",
-        "description": "记录现象、复现、定位、修复与复测。",
+        "description": "故障排查与解决记录：学习、开发与验证记录",
         "link": "/handbook/troubleshooting"
       }
     ]
@@ -150,19 +156,19 @@
       {
         "slug": "changelog",
         "text": "更新日志",
-        "description": "记录实际发生的页面和流程变更。",
+        "description": "更新日志：学习、开发与验证记录",
         "link": "/updates/changelog"
       },
       {
         "slug": "known-issues",
         "text": "已知问题",
-        "description": "跟踪未解决问题、负责人和关闭条件。",
+        "description": "已知问题：学习、开发与验证记录",
         "link": "/updates/known-issues"
       },
       {
         "slug": "progress",
         "text": "实验进展",
-        "description": "记录进展、证据、阻塞和下一步。",
+        "description": "实验进展：学习、开发与验证记录",
         "link": "/updates/progress"
       }
     ]

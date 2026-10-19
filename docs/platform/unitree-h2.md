@@ -4,6 +4,7 @@ description: "宇树 H2 开发指南：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 2
 ---
 
 # 宇树 H2 开发指南

@@ -4,6 +4,7 @@ description: "双臂 SE(3) 位姿控制：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 2
 ---
 
 # 双臂 SE(3) 位姿控制

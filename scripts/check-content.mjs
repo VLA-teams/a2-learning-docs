@@ -33,8 +33,17 @@ for (const file of pages) {
   const content = readFileSync(file, 'utf8')
   const rel = show(file)
 
+  // 0) BOM 检查：Windows 记事本等编辑器会在开头写入 BOM，
+  //    导致 ^--- 匹配不到，页面被误判为「缺少 frontmatter」。
+  const hasBOM = content.charCodeAt(0) === 0xfeff
+  if (hasBOM) {
+    add('bom', rel, '文件开头有 UTF-8 BOM（不可见字符）',
+      '用 VS Code 打开，右下角编码改为 "UTF-8"（不要选 UTF-8 with BOM）后另存；或在文件开头手动删掉多余字符')
+  }
+  const body0 = hasBOM ? content.slice(1) : content
+
   // 1) frontmatter 检查：必须从第 1 行开始
-  const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  const fmMatch = body0.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!fmMatch) {
     add('frontmatter', rel, '文件开头缺少 frontmatter',
       '在文件第一行插入下面 7 行（--- 之间的 5 个字段必须改成本页的真实信息）')
@@ -74,11 +83,27 @@ for (const file of pages) {
   }
 
   // 6) 站内链接（无论 frontmatter 是否通过都要查）
-  const body = content.replace(/~~~[\s\S]*?~~~/g, '')
+  const body = body0.replace(/~~~[\s\S]*?~~~/g, '')
   for (const match of body.matchAll(/\]\(([^\s)]+)\)/g)) checkLink(match[1], file)
 }
 
 for (const group of catalog) for (const item of group.items) checkLink(item.link, 'catalog.json')
+
+// 7) 页面是否落在可被侧栏收录的位置
+//    catalog.json 由 build-catalog.mjs 自动生成，只扫描六个栏目目录；
+//    docs/ 根目录的说明页和 guide/（快速开始）在 config.mts 里单独注册，
+//    因此这里对它们豁免，其余位置的新页面会提示。
+const GROUP_DIRS = ['platform', 'setup', 'simulation', 'vla', 'handbook', 'updates']
+const SIDEBAR_EXTRA = ['docs/index.md', 'docs/contribute.md', 'docs/deployment.md', 'docs/guide/index.md']
+for (const file of pages) {
+  const rel = show(file)
+  const top = rel.replace(/^docs\//, '').split('/')[0]
+  const isGroupIndex = GROUP_DIRS.includes(top) && rel.endsWith('/index.md')
+  if (!GROUP_DIRS.includes(top) && !SIDEBAR_EXTRA.includes(rel) && !isGroupIndex) {
+    add('location', rel, '不在六个栏目目录下，侧栏和首页都不会显示',
+      '把文件移到对应的栏目目录（platform / setup / simulation / vla / handbook / updates），再写好 frontmatter')
+  }
+}
 
 /** 输出报告 */
 if (problems.length) {
@@ -86,12 +111,14 @@ if (problems.length) {
   for (const p of problems) (byKind[p.kind] ||= []).push(p)
 
   const titles = {
+    bom: '文件带 BOM（会导致 frontmatter 失效）',
     frontmatter: '缺少 frontmatter（最常见）',
     field: 'frontmatter 字段不全',
     status: 'status 取值错误',
     date: 'date 日期格式错误',
     filename: '文件名不规范',
     deadlink: '站内链接指向不存在的页面',
+    location: '页面不在栏目目录下（侧栏看不到）',
   }
 
   console.error('\n内容检查未通过，共 ' + problems.length + ' 个问题：\n')

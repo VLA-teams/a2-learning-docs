@@ -4,6 +4,7 @@ description: "RTX 5090 工作站意外关机或重启后，按顺序恢复 AGIBO
 author: 文档共建小组
 status: review
 date: 2026-10-17
+order: 4
 ---
 
 # 5090 意外关机 / 重启后：AGIBOT A2 MuJoCo 与网页示教面板恢复手册

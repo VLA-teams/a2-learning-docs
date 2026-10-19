@@ -4,6 +4,7 @@ description: "更新日志：学习、开发与验证记录"
 author: 文档共建小组
 status: review
 date: 2026-10-17
+order: 1
 ---
 
 # 更新日志

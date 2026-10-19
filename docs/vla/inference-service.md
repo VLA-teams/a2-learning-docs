@@ -4,6 +4,7 @@ description: "模型推理服务部署：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 2
 ---
 
 # 模型推理服务部署

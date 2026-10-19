@@ -4,6 +4,7 @@ description: "ROS2 Humble 环境配置：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 2
 ---
 
 # ROS2 Humble 环境配置

@@ -4,6 +4,7 @@ description: "故障排查与解决记录：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 3
 ---
 
 # 故障排查与解决记录

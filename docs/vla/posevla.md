@@ -4,6 +4,7 @@ description: "PoseVLA 与模型架构：学习、开发与验证记录"
 author: 文档共建小组
 status: draft
 date: 2026-10-17
+order: 1
 ---
 
 # PoseVLA 与模型架构

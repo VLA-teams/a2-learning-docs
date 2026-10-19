@@ -7,11 +7,12 @@
     "node": ">=22"
   },
   "scripts": {
-    "docs:dev": "vitepress dev docs --host 127.0.0.1",
-    "docs:build": "vitepress build docs",
+    "catalog": "node scripts/build-catalog.mjs",
+    "docs:dev": "npm run catalog && vitepress dev docs --host 127.0.0.1",
+    "docs:build": "npm run catalog && vitepress build docs",
     "docs:preview": "vitepress preview docs --host 127.0.0.1 --port 4173",
-    "check:content": "node scripts/check-content.mjs",
-    "check": "npm run check:content && npm run docs:build"
+    "check:content": "npm run catalog && node scripts/check-content.mjs",
+    "check": "npm run check:content && vitepress build docs"
   },
   "devDependencies": {
     "vitepress": "1.6.4",

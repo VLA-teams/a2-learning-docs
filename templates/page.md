@@ -4,11 +4,16 @@ description: 一句话说明这一页解决什么问题
 author: 你的名字
 status: draft
 date: 2026-10-17
+order: 99
 ---
 
 # 新页面标题
 
 > 状态为 `draft` 时，页面顶部会自动显示「待完善 · 结构已建立，操作步骤和实测结果待补充」提示；验证完成后把 `status` 改成 `review` 或 `verified` 即可。
+>
+> `order` 控制这个页面在侧栏里的位置（数字小的在前），留空则排在栏目最后。
+> 文件放进六个栏目目录（platform / setup / simulation / vla / handbook / updates）之一后，
+> 侧栏和首页会自动出现这一页，不需要改 catalog.json。
 
 ## 目标
 
