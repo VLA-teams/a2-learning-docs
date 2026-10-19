@@ -5,7 +5,7 @@ import catalog from '../catalog.json'
 <template>
   <div class="lab-intro">
     <span class="lab-eyebrow">EMBODIED AI · KNOWLEDGE BASE</span>
-    <h1>开发文档中心<span class="lab-title-dot">.</span></h1>
+    <h1>开发文档中心</h1>
     <p>从第一次连接机器人，到完成真实世界的闭环实验。<br class="desktop-break"/>把每一步配置、每一次验证和每一个解决方法，留给下一位同行者。</p>
     <div class="lab-intro-actions">
       <a class="lab-primary" :href="withBase('/platform/agibot-a2')">开始学习 A2 <span aria-hidden="true">→</span></a>

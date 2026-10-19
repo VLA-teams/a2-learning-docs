@@ -397,7 +397,6 @@ html { scroll-behavior: smooth; }
 .lab-intro { padding-bottom: 10px; }
 .lab-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.8px; color: var(--vp-c-text-3); }
 .vp-doc .lab-intro h1 { font-size: 48px; letter-spacing: -1.6px; line-height: 1.15; margin-top: 12px; }
-.lab-title-dot { color: var(--vp-c-brand-1); margin-left: 4px; }
 .vp-doc .lab-intro p { color: var(--vp-c-text-2); font-size: 16px; margin: 16px 0 24px; line-height: 1.75; }
 .lab-intro-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
 .vp-doc .lab-primary, .vp-doc .lab-secondary { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; font-size: 14px; font-weight: 600; }
