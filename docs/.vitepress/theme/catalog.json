@@ -76,6 +76,12 @@
         "link": "/simulation/dexterous-hand"
       },
       {
+        "slug": "a2-5090-recovery",
+        "text": "5090 重启后恢复手册",
+        "description": "意外关机或重启后，按顺序恢复仿真、运控与示教面板。",
+        "link": "/simulation/a2-5090-recovery"
+      },
+      {
         "slug": "mobile-base",
         "text": "底盘行走与运动控制",
         "description": "区分设备的移动模式与开放控制接口。",

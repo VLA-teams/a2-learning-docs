@@ -1,12 +1,13 @@
 ---
 title: "5090 意外关机 / 重启后：AGIBOT A2 MuJoCo 与网页示教面板恢复手册"
-description: "手册"
+description: "RTX 5090 工作站意外关机或重启后，按顺序恢复 AGIBOT A2 的 MuJoCo 仿真、motion_control 与网页示教面板。"
 author: 文档共建小组
-status: draft
+status: review
 date: 2026-10-17
 ---
 
 # 5090 意外关机 / 重启后：AGIBOT A2 MuJoCo 与网页示教面板恢复手册
+
 
 **适用环境**：RTX 5090 Ubuntu 工作站 `vstc@AGI`；A2 官方 `a2-simulator:v2.0` 容器 `a2-ultra-sim`；网页面板 `a2_joint_panel_v2`。  
 **版本**：2026-10-16 操作记录整理。**仅用于与 A2 真机网络隔离的 MuJoCo 仿真**，所有命令均不用于 ORIN 实机。  
