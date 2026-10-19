@@ -2,8 +2,8 @@
 
 机器人开发与学习知识库——A2 学习与开发文档站，按「机器人平台 / 环境配置 / 仿真与运动控制 / VLA 模型部署 / 实验操作手册 / 版本与更新」六个栏目组织，把配置、验证和解决问题的过程沉淀下来。
 
-- 线上文档：<https://yuxiongtao666.github.io/a2-learning-docs/>
-- 代码仓库：<https://github.com/yuxiongtao666/a2-learning-docs>
+- 线上文档：<https://VLA-teams.github.io/a2-learning-docs/>
+- 代码仓库：<https://github.com/VLA-teams/a2-learning-docs>
 
 ## 协作方式（推荐：GitHub 网页）
 

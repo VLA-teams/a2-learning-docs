@@ -14,7 +14,7 @@ date: 2026-10-17
 
 - 推送到 `main` 后，`Deploy documentation` 工作流自动构建并发布到 GitHub Pages，无需手动上传网站文件。
 - PR 阶段由 `Check documentation` 工作流做内容检查和构建，状态检查名称为 **`check`**。
-- 当前线上地址：<https://yuxiongtao666.github.io/a2-learning-docs/>
+- 当前线上地址：<https://VLA-teams.github.io/a2-learning-docs/>
 
 首次上线：
 

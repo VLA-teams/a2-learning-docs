@@ -25,7 +25,7 @@ date: 2026-10-17
 1. 注册并登录**自己的** GitHub 账号，不要多人共用一个账号。
 2. 打开维护者发来的邀请邮件，或到 GitHub 通知中心查看邀请：<https://github.com/notifications>。
 3. 点击 **Accept invitation** 接受邀请。
-4. 打开仓库，确认能看到代码：<https://github.com/yuxiongtao666/a2-learning-docs>。
+4. 打开仓库，确认能看到代码：<https://github.com/VLA-teams/a2-learning-docs>。
 
 维护者侧的邀请和权限操作见[发布与部署](/deployment)。
 
@@ -233,7 +233,7 @@ GitHub 网页上传**单个文件上限 25 MB**。超过这个大小，网页上
 超过 25 MB 但确实要放进仓库时，只能走本地 Git（需要安装 Git）：
 
 ~~~bash
-git clone https://github.com/yuxiongtao666/a2-learning-docs.git
+git clone https://github.com/VLA-teams/a2-learning-docs.git
 cd a2-learning-docs
 # 把 PDF 复制到 docs/public/files/ 目录下
 git switch -c docs/zhangsan-pdf
@@ -290,7 +290,7 @@ PR 里出现测试内容（比如随手敲的一串数字、`test`、`1111`）�
 需要批量修改或本地预览时，再安装 Git 和 Node.js 22：
 
 ~~~bash
-git clone https://github.com/yuxiongtao666/a2-learning-docs.git
+git clone https://github.com/VLA-teams/a2-learning-docs.git
 cd a2-learning-docs
 npm ci
 npm run docs:dev
