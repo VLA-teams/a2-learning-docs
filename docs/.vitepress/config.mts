@@ -10,7 +10,10 @@ const repoURL = repository ? 'https://github.com/' + repository : ''
 export default defineConfig({
   lang: 'zh-CN', title: '机器人开发与学习知识库', titleTemplate: ':title · 机器人开发与学习知识库',
   description: '机器人平台、环境配置、仿真与运动控制、VLA 模型部署、实验操作手册、版本与更新。',
-  base, cleanUrls: true, lastUpdated: true, ignoreDeadLinks: false,
+  base, cleanUrls: true, lastUpdated: true,
+  // 内容检查脚本会同时验证 Markdown 页面和 docs/public 下的附件。
+  // VitePress 默认只把附件当作静态资源，因此不把它误判为页面死链。
+  ignoreDeadLinks: [/^\/files\/.+\.(?:pdf|docx|xlsx|pptx|zip|csv)$/i],
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: base + 'logo.svg' }]],
   markdown: { image: { lazyLoading: true } },
   themeConfig: {
